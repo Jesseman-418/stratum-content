@@ -1,29 +1,27 @@
-import { Nav } from "@/components/nav";
-import { Hero } from "@/components/hero";
-import { Video } from "@/components/video";
-import { HowItWorks } from "@/components/how-it-works";
-import { Tiers } from "@/components/tiers";
-import { Operator } from "@/components/operator";
-import { Stories } from "@/components/stories";
-import { Works } from "@/components/works";
-import { Contact } from "@/components/contact";
-import { Footer } from "@/components/footer";
+import { NavV2 } from "@/components/v2/nav";
+import { HeroV2 } from "@/components/v2/hero";
+import { EditorsNoteV2 } from "@/components/v2/editors-note";
+import { PitchV2 } from "@/components/v2/pitch";
+import { ProcessV2 } from "@/components/v2/process";
+import { EditionsV2 } from "@/components/v2/editions";
+import { FeaturesV2 } from "@/components/v2/features";
+import { SubscribeV2 } from "@/components/v2/subscribe";
+import { ColophonV2 } from "@/components/v2/colophon";
 
 export default function Home() {
   return (
     <>
-      <Nav />
+      <NavV2 />
       <main className="flex-1">
-        <Hero />
-        <Video />
-        <HowItWorks />
-        <Tiers />
-        <Operator />
-        <Stories />
-        <Works />
-        <Contact />
+        <HeroV2 />
+        <EditorsNoteV2 />
+        <PitchV2 />
+        <ProcessV2 />
+        <EditionsV2 />
+        <FeaturesV2 />
+        <SubscribeV2 />
       </main>
-      <Footer />
+      <ColophonV2 />
     </>
   );
 }

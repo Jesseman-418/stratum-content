@@ -1,38 +1,43 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  axes: ["opsz", "SOFT", "WONK"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jbMono = JetBrains_Mono({
+  variable: "--font-jb-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://stratum-content.vercel.app"),
   title: {
-    default: "Stratum Content — Your AI-powered Chief Content Officer",
+    default: "Stratum Content · Issue No. 01 — The Studio Book",
     template: "%s · Stratum Content",
   },
   description:
-    "Done-for-you ghostwriting via AI delivery. Voice trained on your last 30 posts. Founder-edited every draft. You hit publish.",
+    "A studio book for founders who want their voice on the page without writing it themselves. Voice-trained ghostwriting. Founder-edited every line. You hit publish.",
   openGraph: {
-    title: "Stratum Content — Your AI-powered Chief Content Officer",
+    title: "Stratum Content · Issue No. 01 — The Studio Book",
     description:
-      "Done-for-you ghostwriting via AI delivery. Voice trained on your last 30 posts. Founder-edited every draft.",
+      "Voice-trained ghostwriting. Founder-edited every line. You hit publish.",
     url: "https://stratum-content.vercel.app",
     siteName: "Stratum Content",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Stratum Content — Your AI-powered Chief Content Officer",
-    description:
-      "Done-for-you ghostwriting via AI delivery. Voice trained on your last 30 posts.",
+    title: "Stratum Content · Issue No. 01 — The Studio Book",
+    description: "Voice-trained ghostwriting. Founder-edited every line.",
   },
 };
 
@@ -44,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${inter.variable} ${jbMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

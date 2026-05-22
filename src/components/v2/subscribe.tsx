@@ -1,13 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { CALENDLY_URL, EMAIL } from "@/lib/constants";
+import { sendContact } from "@/lib/actions";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function SubscribeV2() {
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, startTransition] = useTransition();
 
   return (
     <section
@@ -75,7 +78,21 @@ export function SubscribeV2() {
             transition={{ duration: 0.8, ease }}
             onSubmit={(e) => {
               e.preventDefault();
-              setSent(true);
+              setError(null);
+              const fd = new FormData(e.currentTarget);
+              const form = {
+                name: String(fd.get("name") ?? ""),
+                email: String(fd.get("email") ?? ""),
+                role: "",
+                handle: "",
+                tier: "Free rewrite request",
+                post: String(fd.get("post") ?? ""),
+              };
+              startTransition(async () => {
+                const res = await sendContact(form);
+                if (res.ok) setSent(true);
+                else setError(res.error);
+              });
             }}
             className="lg:col-span-7 p-8 md:p-10 v2-paper-soft text-[color:var(--v2-ink)] flex flex-col gap-5"
             style={{ borderColor: "var(--v2-rule)", borderWidth: 1, borderStyle: "solid" }}
@@ -86,6 +103,7 @@ export function SubscribeV2() {
               <span className="v2-folio">Your name</span>
               <input
                 required
+                name="name"
                 type="text"
                 placeholder="Founder · Operator · Creator"
                 className="bg-transparent v2-serif text-2xl py-2 outline-none v2-rule-b focus:border-[color:var(--v2-accent)]"
@@ -96,6 +114,7 @@ export function SubscribeV2() {
               <span className="v2-folio">Your email</span>
               <input
                 required
+                name="email"
                 type="email"
                 placeholder="you@studio.co"
                 className="bg-transparent v2-serif text-2xl py-2 outline-none v2-rule-b focus:border-[color:var(--v2-accent)]"
@@ -108,19 +127,33 @@ export function SubscribeV2() {
               </span>
               <textarea
                 required
+                name="post"
                 rows={4}
                 placeholder="Paste a post or drop a URL. Tell us the audience and the platform if it helps."
                 className="bg-transparent v2-body text-lg py-2 outline-none v2-rule-b focus:border-[color:var(--v2-accent)] resize-none"
               />
             </label>
 
+            {error && (
+              <p
+                className="v2-mono text-xs"
+                style={{ color: "var(--v2-accent)" }}
+              >
+                {error}
+              </p>
+            )}
+
             <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
               <button
                 type="submit"
-                disabled={sent}
+                disabled={sent || pending}
                 className="v2-ink-fill v2-mono text-[11px] tracking-[0.18em] uppercase px-6 py-4 hover:opacity-90 transition-opacity disabled:opacity-60"
               >
-                {sent ? "Sent · we'll reply within 48 hours" : "Request the rewrite →"}
+                {sent
+                  ? "Sent · we'll reply within 48 hours"
+                  : pending
+                    ? "Sending…"
+                    : "Request the rewrite →"}
               </button>
               <span className="v2-folio">
                 Or write to{" "}
