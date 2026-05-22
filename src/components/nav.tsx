@@ -8,6 +8,7 @@ const internalLinks = [
   { label: "How", href: "#how" },
   { label: "Tiers", href: "#tiers" },
   { label: "Operator", href: "#operator" },
+  { label: "Works", href: "#works" },
   { label: "Signal", href: "#contact" },
 ];
 

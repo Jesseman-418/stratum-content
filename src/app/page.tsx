@@ -5,6 +5,7 @@ import { HowItWorks } from "@/components/how-it-works";
 import { Tiers } from "@/components/tiers";
 import { Operator } from "@/components/operator";
 import { Stories } from "@/components/stories";
+import { Works } from "@/components/works";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 
@@ -19,6 +20,7 @@ export default function Home() {
         <Tiers />
         <Operator />
         <Stories />
+        <Works />
         <Contact />
       </main>
       <Footer />
