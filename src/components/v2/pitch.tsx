@@ -123,11 +123,11 @@ export function PitchV2() {
                 </div>
 
                 {/* Roman numeral display */}
-                <div className="px-8 md:px-10 pt-10 md:pt-14 pb-6 flex items-start justify-between gap-6">
+                <div className="px-8 md:px-10 pt-8 md:pt-10 pb-3 flex items-baseline justify-between gap-6">
                   <span
-                    className="v2-serif leading-[0.78] tracking-[-0.04em] block"
+                    className="v2-serif leading-[0.82] tracking-[-0.03em] block"
                     style={{
-                      fontSize: "clamp(7rem, 14vw, 12rem)",
+                      fontSize: "clamp(3.5rem, 6vw, 5.5rem)",
                       fontVariationSettings:
                         '"opsz" 144, "SOFT" 100, "WONK" 1',
                       color: isFor ? "var(--v2-accent-2)" : "var(--v2-accent)",
@@ -137,16 +137,14 @@ export function PitchV2() {
                     {c.roman}
                   </span>
                   <span
-                    className="v2-mono text-[10px] tracking-[0.22em] uppercase mt-2 text-right"
+                    className="v2-mono text-[10px] tracking-[0.22em] uppercase text-right"
                     style={{
                       color: isFor
                         ? "rgba(243, 236, 225, 0.4)"
                         : "var(--v2-muted)",
                     }}
                   >
-                    Exhibit
-                    <br />
-                    /{c.arabic}
+                    Exhibit /{c.arabic}
                   </span>
                 </div>
 

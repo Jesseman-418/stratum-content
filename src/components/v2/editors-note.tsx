@@ -111,10 +111,10 @@ export function EditorsNoteV2() {
 
             <div className="v2-rule-t pt-5 grid grid-cols-2 gap-3">
               {[
-                ["337", "Cold emails"],
-                ["0", "Replies"],
-                ["1", "Pivot"],
-                ["12", "Desks built for"],
+                ["30", "Posts read to train your voice"],
+                ["100%", "Drafts founder-edited"],
+                ["24h", "Approval window"],
+                ["12", "Desks open per studio"],
               ].map(([n, l]) => (
                 <div key={l} className="flex flex-col gap-1">
                   <span className="v2-serif text-3xl">{n}</span>
