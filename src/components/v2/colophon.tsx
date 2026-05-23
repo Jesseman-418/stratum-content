@@ -10,9 +10,17 @@ export function ColophonV2() {
         <div className="grid grid-cols-12 gap-6 md:gap-10 v2-rule-b pb-12">
           <div className="col-span-12 md:col-span-4">
             <span className="v2-folio">Colophon</span>
-            <h3 className="v2-serif text-4xl mt-3">
-              Stratum<span className="v2-accent-text">.</span> Content
-            </h3>
+            <div className="flex items-center gap-3 mt-3">
+              <img
+                src="/stratum-content-mark-knockout.svg"
+                alt=""
+                aria-hidden="true"
+                className="h-10 w-10"
+              />
+              <h3 className="v2-serif text-4xl">
+                Stratum<span className="v2-accent-text">.</span> Content
+              </h3>
+            </div>
             <p className="v2-body text-base mt-4 text-[color:var(--v2-ink-2)] max-w-sm">
               A studio book published from Chennai. Voice-trained ghostwriting
               for founders who want to keep their voice and lose the hours.

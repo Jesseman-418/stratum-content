@@ -21,7 +21,13 @@ export function NavV2() {
       className="sticky top-0 z-50 v2-paper-soft v2-rule-b backdrop-blur-md"
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-14 flex items-center justify-between">
-        <a href="#cover" className="flex items-baseline gap-3">
+        <a href="#cover" className="flex items-center gap-3">
+          <img
+            src="/stratum-content-mark-knockout.svg"
+            alt=""
+            aria-hidden="true"
+            className="h-7 w-7"
+          />
           <span className="v2-serif text-xl font-medium tracking-tight">
             Stratum<span className="v2-accent-text">.</span>
           </span>
