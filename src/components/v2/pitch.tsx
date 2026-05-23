@@ -6,22 +6,34 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const cases = [
   {
-    label: "Against",
+    roman: "I",
+    arabic: "01",
+    verdict: "Against",
     title: "Raw AI",
+    tagline: "Algorithm in the room.",
     body:
       "Generic cadence. Hooks that average a billion posts. Punctuation that screams algorithm. Audiences feel it in under three seconds. Reach collapses. Trust follows.",
+    rule: "Indistinguishable from default.",
   },
   {
-    label: "Against",
+    roman: "II",
+    arabic: "02",
+    verdict: "Against",
     title: "Junior ghosts",
+    tagline: "Cheap on paper. Expensive on the calendar.",
     body:
-      "Cheap on the invoice, expensive on the calendar. Mid-quality drafts that need three rounds of edits. You become the editor of your own ghostwriter. The hours come back.",
+      "Mid-quality drafts that need three rounds of edits. You become the editor of your own ghostwriter. The hours come back. The invoice still arrives.",
+    rule: "Hidden labour, visible cost.",
   },
   {
-    label: "For",
+    roman: "III",
+    arabic: "03",
+    verdict: "For",
     title: "AI delivery",
+    tagline: "Voice model proposes. Editor disposes.",
     body:
-      "A studio trains a small model on your voice. The model proposes. The editor disposes. Twelve clients per editor instead of five — same skill, two-point-four times the throughput. Service-business retainers, software margins.",
+      "A studio trains a small model on your voice. Twelve clients per editor instead of five — same skill, two-point-four times the throughput. Service-business retainers, software margins.",
+    rule: "The verdict the studio sells.",
   },
 ];
 
@@ -47,7 +59,7 @@ export function PitchV2() {
             transition={{ duration: 0.8, ease }}
             className="col-span-12 lg:col-span-10"
           >
-            <span className="v2-folio">The pitch</span>
+            <span className="v2-folio">The pitch · entered into the record</span>
             <h2 className="v2-display mt-4 text-[clamp(2.25rem,6vw,5.25rem)] font-medium max-w-5xl">
               The case against raw AI,{" "}
               <span className="italic v2-accent-text">in three counts</span>.
@@ -59,56 +71,155 @@ export function PitchV2() {
           </motion.div>
         </div>
 
+        {/* Counts — court docket treatment */}
         <div className="mt-16 md:mt-24 grid md:grid-cols-3 gap-px v2-rule-t v2-rule-b">
-          {cases.map((c, i) => (
-            <motion.article
-              key={c.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, delay: i * 0.08, ease }}
-              className={`p-8 md:p-10 flex flex-col gap-5 v2-rule ${
-                i < 2 ? "md:border-r" : ""
-              }`}
-              style={{
-                background:
-                  c.label === "For" ? "var(--v2-ink)" : "var(--v2-paper-soft)",
-                color: c.label === "For" ? "var(--v2-paper)" : "var(--v2-ink)",
-                borderRightStyle: "solid",
-                borderRightWidth: i < 2 ? "1px" : 0,
-                borderRightColor: "var(--v2-rule)",
-              }}
-            >
-              <div className="flex items-center justify-between">
-                <span
-                  className="v2-mono text-[10.5px] tracking-[0.18em] uppercase"
-                  style={{
-                    color:
-                      c.label === "For"
-                        ? "var(--v2-accent-2)"
-                        : "var(--v2-accent)",
-                  }}
-                >
-                  Count {i + 1} · {c.label}
-                </span>
-                <span className="v2-folio">0{i + 1}</span>
-              </div>
-              <h3 className="v2-serif text-3xl md:text-4xl font-medium tracking-tight">
-                {c.title}
-              </h3>
-              <p
-                className="v2-body text-[15.5px]"
+          {cases.map((c, i) => {
+            const isFor = c.verdict === "For";
+            return (
+              <motion.article
+                key={c.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: i * 0.08, ease }}
+                className="relative flex flex-col"
                 style={{
-                  color:
-                    c.label === "For"
-                      ? "rgba(243, 236, 225, 0.78)"
-                      : "var(--v2-ink-2)",
+                  background: isFor ? "var(--v2-ink)" : "var(--v2-paper)",
+                  color: isFor ? "var(--v2-paper)" : "var(--v2-ink)",
+                  borderRightStyle: "solid",
+                  borderRightWidth: i < 2 ? 1 : 0,
+                  borderRightColor: isFor
+                    ? "rgba(243, 236, 225, 0.15)"
+                    : "var(--v2-rule)",
                 }}
               >
-                {c.body}
-              </p>
-            </motion.article>
-          ))}
+                {/* Docket strip — top */}
+                <div
+                  className="px-8 md:px-10 py-3.5 flex items-center justify-between border-b"
+                  style={{
+                    borderColor: isFor
+                      ? "rgba(243, 236, 225, 0.15)"
+                      : "var(--v2-rule)",
+                  }}
+                >
+                  <span
+                    className="v2-mono text-[10px] tracking-[0.22em] uppercase"
+                    style={{
+                      color: isFor ? "var(--v2-accent-2)" : "var(--v2-accent)",
+                    }}
+                  >
+                    Count {c.arabic}
+                  </span>
+                  <span
+                    className="v2-mono text-[10px] tracking-[0.22em] uppercase"
+                    style={{
+                      color: isFor
+                        ? "rgba(243, 236, 225, 0.5)"
+                        : "var(--v2-muted)",
+                    }}
+                  >
+                    The verdict · {c.verdict}
+                  </span>
+                </div>
+
+                {/* Roman numeral display */}
+                <div className="px-8 md:px-10 pt-10 md:pt-14 pb-6 flex items-start justify-between gap-6">
+                  <span
+                    className="v2-serif leading-[0.78] tracking-[-0.04em] block"
+                    style={{
+                      fontSize: "clamp(7rem, 14vw, 12rem)",
+                      fontVariationSettings:
+                        '"opsz" 144, "SOFT" 100, "WONK" 1',
+                      color: isFor ? "var(--v2-accent-2)" : "var(--v2-accent)",
+                      fontStyle: "italic",
+                    }}
+                  >
+                    {c.roman}
+                  </span>
+                  <span
+                    className="v2-mono text-[10px] tracking-[0.22em] uppercase mt-2 text-right"
+                    style={{
+                      color: isFor
+                        ? "rgba(243, 236, 225, 0.4)"
+                        : "var(--v2-muted)",
+                    }}
+                  >
+                    Exhibit
+                    <br />
+                    /{c.arabic}
+                  </span>
+                </div>
+
+                {/* Title — uppercase tracked-out, distinct from other display heads */}
+                <div className="px-8 md:px-10 pb-3">
+                  <h3
+                    className="font-medium tracking-[0.04em] uppercase"
+                    style={{
+                      fontFamily: "var(--font-inter), system-ui, sans-serif",
+                      fontSize: "clamp(1rem, 1.4vw, 1.2rem)",
+                      letterSpacing: "0.18em",
+                      color: isFor ? "var(--v2-accent-2)" : "var(--v2-accent)",
+                    }}
+                  >
+                    — {c.title}
+                  </h3>
+                  <p
+                    className="v2-pullquote mt-3 text-2xl md:text-[28px] leading-[1.18]"
+                    style={{
+                      color: isFor
+                        ? "rgba(243, 236, 225, 0.95)"
+                        : "var(--v2-ink)",
+                    }}
+                  >
+                    {c.tagline}
+                  </p>
+                </div>
+
+                {/* Body */}
+                <div className="px-8 md:px-10 pb-8 mt-2">
+                  <p
+                    className="v2-body text-[15.5px] leading-[1.6]"
+                    style={{
+                      color: isFor
+                        ? "rgba(243, 236, 225, 0.75)"
+                        : "var(--v2-ink-2)",
+                    }}
+                  >
+                    {c.body}
+                  </p>
+                </div>
+
+                {/* Rule (footer of card — verdict line) */}
+                <div
+                  className="mt-auto px-8 md:px-10 py-4 flex items-center justify-between gap-4 border-t"
+                  style={{
+                    borderColor: isFor
+                      ? "rgba(243, 236, 225, 0.15)"
+                      : "var(--v2-rule)",
+                  }}
+                >
+                  <span
+                    className="v2-mono text-[10px] tracking-[0.18em] uppercase"
+                    style={{
+                      color: isFor
+                        ? "rgba(243, 236, 225, 0.5)"
+                        : "var(--v2-muted)",
+                    }}
+                  >
+                    Ruling
+                  </span>
+                  <span
+                    className="v2-serif italic text-sm md:text-base"
+                    style={{
+                      color: isFor ? "var(--v2-accent-2)" : "var(--v2-ink-2)",
+                    }}
+                  >
+                    {c.rule}
+                  </span>
+                </div>
+              </motion.article>
+            );
+          })}
         </div>
 
         {/* Math callout */}

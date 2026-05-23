@@ -75,11 +75,6 @@ export function ColophonV2() {
                   Kaval (client) ↗
                 </Link>
               </li>
-              <li>
-                <Link href="/" className="hover:v2-accent-text">
-                  Original site (v1) ↗
-                </Link>
-              </li>
             </ul>
           </div>
 
