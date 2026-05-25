@@ -12,6 +12,8 @@ const editions = [
     tag: "Single platform · founder shows up",
     price: "$1,500",
     cadence: "per month",
+    setup: "$500 onboarding",
+    setupNote: "Voice profile + first week of proofs",
     spec: [
       "4 posts / week on 1 platform",
       "Voice profile from your last 30 posts",
@@ -27,6 +29,8 @@ const editions = [
     tag: "Two platforms · founder publishes everywhere",
     price: "$3,000",
     cadence: "per month",
+    setup: "$1,000 onboarding",
+    setupNote: "Voice profile + brand sheet + 2 weeks of proofs",
     starred: true,
     spec: [
       "8 posts / week on 2 platforms",
@@ -42,7 +46,9 @@ const editions = [
     name: "Studio",
     tag: "Three platforms · the brand becomes a publication",
     price: "$7,500",
-    cadence: "per month or $40K × 6 upfront",
+    cadence: "per month · or $40K × 6 upfront",
+    setup: "$2,500 onboarding",
+    setupNote: "Deep voice training + content audit + 30-day pilot",
     spec: [
       "12+ posts / week on 3 platforms",
       "2 long-form essays per month",
@@ -157,6 +163,49 @@ export function EditionsV2() {
                   {e.price}
                 </span>
                 <span className="v2-folio">{e.cadence}</span>
+              </div>
+
+              <div
+                className="flex items-baseline justify-between gap-3 v2-rule-t pt-3"
+                style={{
+                  borderColor: e.starred
+                    ? "rgba(243, 236, 225, 0.18)"
+                    : "var(--v2-rule)",
+                }}
+              >
+                <div className="flex flex-col gap-0.5">
+                  <span
+                    className="v2-serif text-xl md:text-2xl"
+                    style={{
+                      color: e.starred
+                        ? "var(--v2-accent-2)"
+                        : "var(--v2-accent)",
+                      fontVariationSettings: '"opsz" 60',
+                    }}
+                  >
+                    + {e.setup}
+                  </span>
+                  <span
+                    className="v2-folio"
+                    style={{
+                      color: e.starred
+                        ? "rgba(243, 236, 225, 0.55)"
+                        : "var(--v2-muted)",
+                    }}
+                  >
+                    {e.setupNote}
+                  </span>
+                </div>
+                <span
+                  className="v2-folio text-right"
+                  style={{
+                    color: e.starred
+                      ? "rgba(243, 236, 225, 0.5)"
+                      : "var(--v2-muted)",
+                  }}
+                >
+                  one-time
+                </span>
               </div>
 
               <ul className="flex flex-col gap-3 v2-rule-t pt-5">
